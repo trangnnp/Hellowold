@@ -22,8 +22,12 @@ import android.util.Log;
 import com.google.ar.core.AugmentedImage;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.Node;
+import com.google.ar.sceneform.math.Quaternion;
 import com.google.ar.sceneform.math.Vector3;
 import com.google.ar.sceneform.rendering.ModelRenderable;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -45,6 +49,23 @@ public class AugmentedImageNode extends AnchorNode {
   private static CompletableFuture<ModelRenderable> urCorner;
   private static CompletableFuture<ModelRenderable> lrCorner;
   private static CompletableFuture<ModelRenderable> llCorner;
+  private static CompletableFuture<ModelRenderable> lion;
+  private static CompletableFuture<ModelRenderable> ambulance;
+  private static CompletableFuture<ModelRenderable> bulldozer;
+  private static CompletableFuture<ModelRenderable> camel;
+  private static CompletableFuture<ModelRenderable> cat;
+  private static CompletableFuture<ModelRenderable> cheetah;
+  private static CompletableFuture<ModelRenderable> dog;
+  private static CompletableFuture<ModelRenderable> firetruck;
+  private static CompletableFuture<ModelRenderable> fish;
+  private static CompletableFuture<ModelRenderable> fox;
+  private static CompletableFuture<ModelRenderable> militarytruck;
+  private static CompletableFuture<ModelRenderable> policecar;
+  private static CompletableFuture<ModelRenderable> schoolbus;
+  private static CompletableFuture<ModelRenderable> zebra;
+
+
+  private Map<String, CompletableFuture<ModelRenderable>> mapp = new HashMap<>();
 
   public AugmentedImageNode(Context context) {
     // Upon construction, start loading the models for the corners of the frame.
@@ -65,7 +86,68 @@ public class AugmentedImageNode extends AnchorNode {
           ModelRenderable.builder()
               .setSource(context, Uri.parse("models/frame_lower_right.sfb"))
               .build();
+
+      lion = ModelRenderable.builder()
+              .setSource(context, Uri.parse("Lion.sfb"))
+              .build();
+
+      ambulance = ModelRenderable.builder()
+              .setSource(context, Uri.parse("Ambulance.sfb"))
+              .build();
+      bulldozer = ModelRenderable.builder()
+              .setSource(context, Uri.parse("Bulldozer_1375.sfb"))
+              .build();
+      camel = ModelRenderable.builder()
+              .setSource(context, Uri.parse("BactrianCamel.sfb"))
+              .build();
+      cat = ModelRenderable.builder()
+              .setSource(context, Uri.parse("Mesh_Cat.sfb"))
+              .build();
+      cheetah = ModelRenderable.builder()
+              .setSource(context, Uri.parse("Cheetah.sfb"))
+              .build();
+      dog = ModelRenderable.builder()
+              .setSource(context, Uri.parse("model_High Quality Scanned and cleaned dog_20170522_225430513.sfb"))
+              .build();
+      firetruck = ModelRenderable.builder()
+              .setSource(context, Uri.parse("model.sfb"))
+              .build();
+      fish = ModelRenderable.builder()
+              .setSource(context, Uri.parse("NOVELO_GOLDFISH.sfb"))
+              .build();
+      fox = ModelRenderable.builder()
+              .setSource(context, Uri.parse("ArcticFox_Posed.sfb"))
+              .build();
+      militarytruck = ModelRenderable.builder()
+              .setSource(context, Uri.parse("Tusk_Truck.sfb"))
+              .build();
+      policecar = ModelRenderable.builder()
+              .setSource(context, Uri.parse("PoliceCar_1396.sfb"))
+              .build();
+      schoolbus = ModelRenderable.builder()
+              .setSource(context, Uri.parse("Bus_1376.sfb"))
+              .build();
+      zebra = ModelRenderable.builder()
+              .setSource(context, Uri.parse("Zebra.sfb"))
+              .build();
+
+      mapp.put("lion.jpg", lion);
+      mapp.put("ambulance.png", ambulance);
+      mapp.put("bulldozer.png", bulldozer);
+      mapp.put("camel.png", camel);
+      mapp.put("cat.png", cat);
+      mapp.put("cheetah.png", cheetah);
+      mapp.put("dog.jpg", dog);
+      mapp.put("firetruck.png", firetruck);
+      mapp.put("fish.jpg", fish);
+      mapp.put("fox.png", fox);
+      mapp.put("militarytruck.png", militarytruck);
+      mapp.put("policecar.png", policecar);
+      mapp.put("schoolbus.png", schoolbus);
+      mapp.put("zebra.png", zebra);
     }
+
+
   }
 
   /**
@@ -78,15 +160,27 @@ public class AugmentedImageNode extends AnchorNode {
   public void setImage(AugmentedImage image) {
     this.image = image;
 
-    // If any of the models are not loaded, then recurse when all are loaded.
-    if (!ulCorner.isDone() || !urCorner.isDone() || !llCorner.isDone() || !lrCorner.isDone()) {
-      CompletableFuture.allOf(ulCorner, urCorner, llCorner, lrCorner)
-          .thenAccept((Void aVoid) -> setImage(image))
-          .exceptionally(
-              throwable -> {
-                Log.e(TAG, "Exception loading", throwable);
-                return null;
-              });
+    CompletableFuture<ModelRenderable> img = mapp.get(image.getName());
+
+//    // If any of the models are not loaded, then recurse when all are loaded.
+//    if (!lion.isDone() ||!ulCorner.isDone() || !urCorner.isDone() || !llCorner.isDone() || !lrCorner.isDone()) {
+//      CompletableFuture.allOf(lion, ulCorner, urCorner, llCorner, lrCorner)
+//          .thenAccept((Void aVoid) -> setImage(image))
+//          .exceptionally(
+//              throwable -> {
+//                Log.e(TAG, "Exception loading", throwable);
+//                return null;
+//              });
+//    }
+
+    if (!img.isDone()) {
+      CompletableFuture.allOf(img)
+              .thenAccept((Void aVoid) -> setImage(image))
+              .exceptionally(
+                      throwable -> {
+                        Log.e(TAG, "Exception loading", throwable);
+                        return null;
+                      });
     }
 
     // Set the anchor based on the center of the image.
@@ -97,32 +191,41 @@ public class AugmentedImageNode extends AnchorNode {
     Node cornerNode;
 
     // Upper left corner.
-    localPosition.set(-0.5f * image.getExtentX(), 0.0f, -0.5f * image.getExtentZ());
+    localPosition.set(-0.0f * image.getExtentX(), 0.0f, -0.0f * image.getExtentZ());
     cornerNode = new Node();
     cornerNode.setParent(this);
     cornerNode.setLocalPosition(localPosition);
-    cornerNode.setRenderable(ulCorner.getNow(null));
+    cornerNode.setLocalScale(new Vector3(0.1f, 0.1f, 0.1f));
+    cornerNode.setLocalRotation(new Quaternion());
+    cornerNode.setRenderable(img.getNow(null));
 
-    // Upper right corner.
-    localPosition.set(0.5f * image.getExtentX(), 0.0f, -0.5f * image.getExtentZ());
-    cornerNode = new Node();
-    cornerNode.setParent(this);
-    cornerNode.setLocalPosition(localPosition);
-    cornerNode.setRenderable(urCorner.getNow(null));
-
-    // Lower right corner.
-    localPosition.set(0.5f * image.getExtentX(), 0.0f, 0.5f * image.getExtentZ());
-    cornerNode = new Node();
-    cornerNode.setParent(this);
-    cornerNode.setLocalPosition(localPosition);
-    cornerNode.setRenderable(lrCorner.getNow(null));
-
-    // Lower left corner.
-    localPosition.set(-0.5f * image.getExtentX(), 0.0f, 0.5f * image.getExtentZ());
-    cornerNode = new Node();
-    cornerNode.setParent(this);
-    cornerNode.setLocalPosition(localPosition);
-    cornerNode.setRenderable(llCorner.getNow(null));
+//    // Upper left corner.
+//    localPosition.set(-0.5f * image.getExtentX(), 0.0f, -0.5f * image.getExtentZ());
+//    cornerNode = new Node();
+//    cornerNode.setParent(this);
+//    cornerNode.setLocalPosition(localPosition);
+//    cornerNode.setRenderable(ulCorner.getNow(null));
+//
+//    // Upper right corner.
+//    localPosition.set(0.5f * image.getExtentX(), 0.0f, -0.5f * image.getExtentZ());
+//    cornerNode = new Node();
+//    cornerNode.setParent(this);
+//    cornerNode.setLocalPosition(localPosition);
+//    cornerNode.setRenderable(urCorner.getNow(null));
+//
+//    // Lower right corner.
+//    localPosition.set(0.5f * image.getExtentX(), 0.0f, 0.5f * image.getExtentZ());
+//    cornerNode = new Node();
+//    cornerNode.setParent(this);
+//    cornerNode.setLocalPosition(localPosition);
+//    cornerNode.setRenderable(lrCorner.getNow(null));
+//
+//    // Lower left corner.
+//    localPosition.set(-0.5f * image.getExtentX(), 0.0f, 0.5f * image.getExtentZ());
+//    cornerNode = new Node();
+//    cornerNode.setParent(this);
+//    cornerNode.setLocalPosition(localPosition);
+//    cornerNode.setRenderable(llCorner.getNow(null));
   }
 
   public AugmentedImage getImage() {

@@ -55,23 +55,94 @@ dependencies {
 }
 
 apply plugin: 'com.google.ar.sceneform.plugin'
+//
+//sceneform.asset('sampledata/models/frame_lower_left.obj',
+//        'ss',
+//        'sampledata/models/frame_lower_left.sfa',
+//        'src/main/assets/models/frame_lower_left')
+//
+//sceneform.asset('sampledata/models/frame_lower_right.obj',
+//        'ss',
+//        'sampledata/models/frame_lower_right.sfa',
+//        'src/main/assets/models/frame_lower_right')
+//
+//sceneform.asset('sampledata/models/frame_upper_left.obj',
+//        'ss',
+//        'sampledata/models/frame_upper_left.sfa',
+//        'src/main/assets/models/frame_upper_left')
+//
+//sceneform.asset('sampledata/models/frame_upper_right.obj',
+//        'ss',
+//        'sampledata/models/frame_upper_right.sfa',
+//        'src/main/assets/models/frame_upper_right')
 
-sceneform.asset('sampledata/models/frame_lower_left.obj',
-        'default',
-        'sampledata/models/frame_lower_left.sfa',
-        'src/main/assets/models/frame_lower_left')
+sceneform.asset('sampledata/Lion.obj',
+        'lion',
+        'sampledata/Lion.sfa',
+        'src/main/assets/Lion')
 
-sceneform.asset('sampledata/models/frame_lower_right.obj',
-        'default',
-        'sampledata/models/frame_lower_right.sfa',
-        'src/main/assets/models/frame_lower_right')
+sceneform.asset('sampledata/ambulance/Ambulance.obj',
+        'ambulance',
+        'sampledata/ambulance/Ambulance.sfa',
+        'src/main/assets/Ambulance')
 
-sceneform.asset('sampledata/models/frame_upper_left.obj',
-        'default',
-        'sampledata/models/frame_upper_left.sfa',
-        'src/main/assets/models/frame_upper_left')
+sceneform.asset('sampledata/bulldozer/Bulldozer_1375.obj',
+        'bulldozer',
+        'sampledata/bulldozer/Bulldozer_1375.sfa',
+        'src/main/assets/Bulldozer_1375')
 
-sceneform.asset('sampledata/models/frame_upper_right.obj',
-        'default',
-        'sampledata/models/frame_upper_right.sfa',
-        'src/main/assets/models/frame_upper_right')
+sceneform.asset('sampledata/camel/BactrianCamel.obj',
+        'camel',
+        'sampledata/camel/BactrianCamel.sfa',
+        'src/main/assets/BactrianCamel')
+
+sceneform.asset('sampledata/cat/Mesh_Cat.obj',
+        'cat',
+        'sampledata/cat/Mesh_Cat.sfa',
+        'src/main/assets/Mesh_Cat')
+
+sceneform.asset('sampledata/cheetah/Cheetah.obj',
+        'cheetah',
+        'sampledata/cheetah/Cheetah.sfa',
+        'src/main/assets/Cheetah')
+
+sceneform.asset('sampledata/dog/model_High Quality Scanned and cleaned dog_20170522_225430513.obj',
+        'dog',
+        'sampledata/dog/model_High Quality Scanned and cleaned dog_20170522_225430513.sfa',
+        'src/main/assets/model_High Quality Scanned and cleaned dog_20170522_225430513')
+
+sceneform.asset('sampledata/fire/model.obj',
+        'firetruck',
+        'sampledata/fire/model.sfa',
+        'src/main/assets/model')
+
+sceneform.asset('sampledata/fish/NOVELO_GOLDFISH.obj',
+        'fish',
+        'sampledata/fish/NOVELO_GOLDFISH.sfa',
+        'src/main/assets/NOVELO_GOLDFISH')
+
+sceneform.asset('sampledata/foc/ArcticFox_Posed.obj',
+        'fox',
+        'sampledata/foc/ArcticFox_Posed.sfa',
+        'src/main/assets/ArcticFox_Posed')
+
+sceneform.asset('sampledata/militarytruck/Tusk_Truck.obj',
+        'militarytruck',
+        'sampledata/militarytruck/Tusk_Truck.sfa',
+        'src/main/assets/Tusk_Truck')
+
+sceneform.asset('sampledata/policecar/PoliceCar_1396.obj',
+        'policecar',
+        'sampledata/policecar/PoliceCar_1396.sfa',
+        'src/main/assets/PoliceCar_1396')
+
+sceneform.asset('sampledata/schoolbus/Bus_1376.obj',
+        'schoolbus',
+        'sampledata/schoolbus/Bus_1376.sfa',
+        'src/main/assets/Bus_1376')
+
+sceneform.asset('sampledata/zebra/Zebra.obj',
+        'zebra',
+        'sampledata/zebra/Zebra.sfa',
+        'src/main/assets/Zebra')
+
