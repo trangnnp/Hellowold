@@ -13,48 +13,193 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AugmentedImageActivity">
 
 
-    <fragment android:name="com.google.ar.sceneform.samples.augmentedimage.AugmentedImageFragment"
+    <fragment
         android:id="@+id/ux_fragment"
+        android:name="com.google.ar.sceneform.samples.augmentedimage.AugmentedImageFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/image_view_fit_to_scan"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/fit_image_to_scan"
+        android:scaleType="fitCenter"
+        android:src="@drawable/fit_to_scan"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/view_top"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape"
+        android:clipChildren="true"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/text_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppinsmedium"
+            android:gravity="center|center_vertical"
+            android:paddingTop="20dp"
+            android:text="@string/title_nav"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textColor="@android:color/black">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/text_top2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:gravity="center|center_vertical"
+            android:text="@string/subtitle_top_nav"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="12.5sp"
+            android:paddingBottom="12dp">
+
+        </TextView>
+
+        <View
+            android:layout_width="60dp"
+            android:layout_height="4dp"
+            android:background="@drawable/shapedash"
+            android:layout_gravity="center"
+            android:alpha="0.4"
+            >
+
+        </View>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@android:color/transparent">
+
+        </View>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/view_bottom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clipChildren="true"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/shapebottom">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@android:color/transparent">
+
+        </View>
+
+        <View
+            android:layout_width="60dp"
+            android:layout_height="4dp"
+            android:background="@drawable/shapedash"
+            android:layout_gravity="center"
+            android:alpha="0.4"
+            >
+
+        </View>
 
 
-  <ImageView
-      android:id="@+id/image_view_fit_to_scan"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_gravity="center"
-      android:scaleType="fitCenter"
-      android:src="@drawable/fit_to_scan"
-      android:contentDescription="@string/fit_image_to_scan"
-      />
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:background="@drawable/shape"-->
-<!--        android:clipChildren="true">-->
-<!--        <TextView-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="HELLO"-->
-<!--            android:layout_weight="1"-->
-<!--            android:textColor="@android:color/black"-->
-<!--            android:fontFamily="@font/poppins"-->
-<!--            android:textAlignment="center"-->
-<!--            android:gravity="center|center_vertical"-->
-<!--            android:paddingTop="10dp"-->
-<!--            android:paddingBottom="10dp">-->
+        <TextView
+            android:id="@+id/text_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppinsmedium"
+            android:gravity="start|center_vertical"
+            android:paddingTop="12dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16sp"
+            android:text="Bottom"
+            android:textColor="@android:color/black"
+            android:textSize="24sp">
 
-<!--        </TextView>-->
-<!--    </LinearLayout>-->
+        </TextView>
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/text_bottom2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:gravity="start|center_vertical"
+            android:paddingBottom="36dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16sp"
+            android:text="Bottome!"
+            android:textColor="@android:color/black"
+            android:textSize="14sp">
+
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/view_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clipChildren="true"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_top"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/shapeshare">
+
+        <TextView
+            android:id="@+id/text_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:gravity="start|center_vertical"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="6sp"
+            android:text="Download backdrop"
+            android:textColor="@android:color/black"
+            android:textSize="14sp">
+
+        </TextView>
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/downicon"
+            android:scaleX="1"
+            android:scaleY="1"
+            android:paddingEnd="12dp">
+
+        </ImageView>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

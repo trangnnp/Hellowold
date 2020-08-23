@@ -15,6 +15,7 @@
 package com.google.ar.sceneform.samples.common.helpers;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -24,7 +25,7 @@ import android.view.View;
  * methods.
  */
 public final class SnackbarHelper {
-  private static final int BACKGROUND_COLOR = 0xbf323232;
+  private static final int BACKGROUND_COLOR = 0xFFFFFFFF;
   private static final SnackbarHelper THE_INSTANCE = new SnackbarHelper();
   private Snackbar messageSnackbar;
 
@@ -87,7 +88,7 @@ public final class SnackbarHelper {
                 Snackbar.make(
                     activity.findViewById(android.R.id.content),
                     message,
-                    Snackbar.LENGTH_INDEFINITE);
+                    Snackbar.LENGTH_INDEFINITE).setActionTextColor(Color.BLACK);
             messageSnackbar.getView().setBackgroundColor(BACKGROUND_COLOR);
             if (dismissBehavior != DismissBehavior.HIDE) {
               messageSnackbar.setAction(

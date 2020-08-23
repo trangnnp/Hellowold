@@ -17,4 +17,6 @@
 <resources>
   <string name="app_name">HelloWorld</string>
   <string name="fit_image_to_scan">Fit image to scan</string>
+  <string name="title_nav">HelloWorld app</string>
+  <string name="subtitle_top_nav">Holdover the image to explore the world!</string>
 </resources>
