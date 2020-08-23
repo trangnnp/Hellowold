@@ -38,6 +38,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
 
   private ArFragment arFragment;
   private ImageView fitToScanView;
+  private String cur = "";
 
   // Augmented image and its associated center pose anchor, keyed by the augmented image in
   // the database.

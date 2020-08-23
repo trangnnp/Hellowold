@@ -28,6 +28,7 @@ import com.google.ar.sceneform.rendering.ModelRenderable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -66,86 +67,82 @@ public class AugmentedImageNode extends AnchorNode {
 
 
   private Map<String, CompletableFuture<ModelRenderable>> mapp = new HashMap<>();
+  private Map<String, Vector3> mappScale = new HashMap<>();
 
   public AugmentedImageNode(Context context) {
-    // Upon construction, start loading the models for the corners of the frame.
-    if (ulCorner == null) {
-      ulCorner =
-          ModelRenderable.builder()
-              .setSource(context, Uri.parse("models/frame_upper_left.sfb"))
-              .build();
-      urCorner =
-          ModelRenderable.builder()
-              .setSource(context, Uri.parse("models/frame_upper_right.sfb"))
-              .build();
-      llCorner =
-          ModelRenderable.builder()
-              .setSource(context, Uri.parse("models/frame_lower_left.sfb"))
-              .build();
-      lrCorner =
-          ModelRenderable.builder()
-              .setSource(context, Uri.parse("models/frame_lower_right.sfb"))
-              .build();
+    lion = ModelRenderable.builder()
+            .setSource(context, Uri.parse("Lion.sfb"))
+            .build();
 
-      lion = ModelRenderable.builder()
-              .setSource(context, Uri.parse("Lion.sfb"))
-              .build();
+    ambulance = ModelRenderable.builder()
+            .setSource(context, Uri.parse("Ambulance.sfb"))
+            .build();
+    bulldozer = ModelRenderable.builder()
+            .setSource(context, Uri.parse("Bulldozer_1375.sfb"))
+            .build();
+    camel = ModelRenderable.builder()
+            .setSource(context, Uri.parse("BactrianCamel.sfb"))
+            .build();
+    cat = ModelRenderable.builder()
+            .setSource(context, Uri.parse("Mesh_Cat.sfb"))
+            .build();
+    cheetah = ModelRenderable.builder()
+            .setSource(context, Uri.parse("Cheetah.sfb"))
+            .build();
+    dog = ModelRenderable.builder()
+            .setSource(context, Uri.parse("model_High Quality Scanned and cleaned dog_20170522_225430513.sfb"))
+            .build();
+    firetruck = ModelRenderable.builder()
+            .setSource(context, Uri.parse("model.sfb"))
+            .build();
+    fish = ModelRenderable.builder()
+            .setSource(context, Uri.parse("NOVELO_GOLDFISH.sfb"))
+            .build();
+    fox = ModelRenderable.builder()
+            .setSource(context, Uri.parse("ArcticFox_Posed.sfb"))
+            .build();
+    militarytruck = ModelRenderable.builder()
+            .setSource(context, Uri.parse("Tusk_Truck.sfb"))
+            .build();
+    policecar = ModelRenderable.builder()
+            .setSource(context, Uri.parse("PoliceCar_1396.sfb"))
+            .build();
+    schoolbus = ModelRenderable.builder()
+            .setSource(context, Uri.parse("Bus_1376.sfb"))
+            .build();
+    zebra = ModelRenderable.builder()
+            .setSource(context, Uri.parse("Zebra.sfb"))
+            .build();
 
-      ambulance = ModelRenderable.builder()
-              .setSource(context, Uri.parse("Ambulance.sfb"))
-              .build();
-      bulldozer = ModelRenderable.builder()
-              .setSource(context, Uri.parse("Bulldozer_1375.sfb"))
-              .build();
-      camel = ModelRenderable.builder()
-              .setSource(context, Uri.parse("BactrianCamel.sfb"))
-              .build();
-      cat = ModelRenderable.builder()
-              .setSource(context, Uri.parse("Mesh_Cat.sfb"))
-              .build();
-      cheetah = ModelRenderable.builder()
-              .setSource(context, Uri.parse("Cheetah.sfb"))
-              .build();
-      dog = ModelRenderable.builder()
-              .setSource(context, Uri.parse("model_High Quality Scanned and cleaned dog_20170522_225430513.sfb"))
-              .build();
-      firetruck = ModelRenderable.builder()
-              .setSource(context, Uri.parse("model.sfb"))
-              .build();
-      fish = ModelRenderable.builder()
-              .setSource(context, Uri.parse("NOVELO_GOLDFISH.sfb"))
-              .build();
-      fox = ModelRenderable.builder()
-              .setSource(context, Uri.parse("ArcticFox_Posed.sfb"))
-              .build();
-      militarytruck = ModelRenderable.builder()
-              .setSource(context, Uri.parse("Tusk_Truck.sfb"))
-              .build();
-      policecar = ModelRenderable.builder()
-              .setSource(context, Uri.parse("PoliceCar_1396.sfb"))
-              .build();
-      schoolbus = ModelRenderable.builder()
-              .setSource(context, Uri.parse("Bus_1376.sfb"))
-              .build();
-      zebra = ModelRenderable.builder()
-              .setSource(context, Uri.parse("Zebra.sfb"))
-              .build();
+    mapp.put("lion.jpg", lion);
+    mapp.put("ambulance.png", ambulance);
+    mapp.put("bulldozer.png", bulldozer);
+    mapp.put("camel.png", camel);
+    mapp.put("cat.png", cat);
+    mapp.put("cheetah.png", cheetah);
+    mapp.put("dog.jpg", dog);
+    mapp.put("firetruck.png", firetruck);
+    mapp.put("fish.jpg", fish);
+    mapp.put("fox.png", fox);
+    mapp.put("militarytruck.png", militarytruck);
+    mapp.put("policecar.png", policecar);
+    mapp.put("schoolbus.png", schoolbus);
+    mapp.put("zebra.png", zebra);
 
-      mapp.put("lion.jpg", lion);
-      mapp.put("ambulance.png", ambulance);
-      mapp.put("bulldozer.png", bulldozer);
-      mapp.put("camel.png", camel);
-      mapp.put("cat.png", cat);
-      mapp.put("cheetah.png", cheetah);
-      mapp.put("dog.jpg", dog);
-      mapp.put("firetruck.png", firetruck);
-      mapp.put("fish.jpg", fish);
-      mapp.put("fox.png", fox);
-      mapp.put("militarytruck.png", militarytruck);
-      mapp.put("policecar.png", policecar);
-      mapp.put("schoolbus.png", schoolbus);
-      mapp.put("zebra.png", zebra);
-    }
+    mappScale.put("lion.jpg", new Vector3(0.05f, 0.05f, 0.05f));
+    mappScale.put("ambulance.png", new Vector3(0.06f, 0.06f, 0.06f));
+    mappScale.put("bulldozer.png", new Vector3(0.08f, 0.08f, 0.08f));
+    mappScale.put("camel.png", new Vector3(0.1f, 0.1f, 0.1f));
+    mappScale.put("cat.png", new Vector3(0.03f, 0.03f, 0.03f));
+    mappScale.put("cheetah.png", new Vector3(0.03f, 0.03f, 0.03f));
+    mappScale.put("dog.jpg", new Vector3(0.07f, 0.07f, 0.07f));
+    mappScale.put("firetruck.png", new Vector3(0.7f, 0.7f, 0.7f));
+    mappScale.put("fish.jpg", new Vector3(0.1f, 0.1f, 0.1f));
+    mappScale.put("fox.png", new Vector3(0.1f, 0.1f, 0.1f));
+    mappScale.put("militarytruck.png", new Vector3(0.1f, 1f, 0.1f));
+    mappScale.put("policecar.png", new Vector3(0.05f, 0.05f, 0.05f));
+    mappScale.put("schoolbus.png", new Vector3(0.1f, 0.1f, 0.1f));
+    mappScale.put("zebra.png", new Vector3(0.1f, 0.1f, 0.1f));
 
 
   }
@@ -173,7 +170,7 @@ public class AugmentedImageNode extends AnchorNode {
 //              });
 //    }
 
-    if (!img.isDone()) {
+    if (!Objects.requireNonNull(img).isDone()) {
       CompletableFuture.allOf(img)
               .thenAccept((Void aVoid) -> setImage(image))
               .exceptionally(
@@ -183,19 +180,16 @@ public class AugmentedImageNode extends AnchorNode {
                       });
     }
 
-    // Set the anchor based on the center of the image.
     setAnchor(image.createAnchor(image.getCenterPose()));
 
-    // Make the 4 corner nodes.
     Vector3 localPosition = new Vector3();
     Node cornerNode;
 
-    // Upper left corner.
     localPosition.set(-0.0f * image.getExtentX(), 0.0f, -0.0f * image.getExtentZ());
     cornerNode = new Node();
     cornerNode.setParent(this);
     cornerNode.setLocalPosition(localPosition);
-    cornerNode.setLocalScale(new Vector3(0.1f, 0.1f, 0.1f));
+    cornerNode.setLocalScale(Objects.requireNonNull(mappScale.get(image.getName())));
     cornerNode.setLocalRotation(new Quaternion());
     cornerNode.setRenderable(img.getNow(null));
 
