@@ -171,7 +171,7 @@
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/view_top"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="160dp"
         android:background="@drawable/shapeshare">
 
         <TextView

@@ -114,14 +114,6 @@ public class AugmentedImageActivity extends AppCompatActivity {
               }
             });
             return true;
-          case (MotionEvent.ACTION_UP):
-            myView2.animate().alpha(1).setDuration(250).withEndAction(new Runnable() {
-              @Override
-              public void run() {
-                myView2.setAlpha(1);
-              }
-            });
-            return true;
           default :
             return true;
         }
