@@ -107,7 +107,7 @@ public class AugmentedImageActivity extends AppCompatActivity {
           // When an image is in PAUSED state, but the camera is not PAUSED, it has been detected,
           // but not yet tracked.
           String text = "Detected Image " + augmentedImage.getIndex();
-          SnackbarHelper.getInstance().showMessage(this, text);
+          SnackbarHelper.getInstance().showMessage(this, augmentedImage.getName());
           break;
 
         case TRACKING:
